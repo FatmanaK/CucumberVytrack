@@ -8,6 +8,13 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+
+/**
+ * I use this class for login in
+ * First we have to create constructor, because whenever we call this class it will use Driver.getDriver class to
+ *
+ * */
+
 public class LoginPage {
     public LoginPage(){PageFactory.initElements(Driver.getDriver(), this);}
 
@@ -35,12 +42,7 @@ public class LoginPage {
     public WebElement errorMessageElement;
 
 
-    public void login(String username, String password){
-        userNameElement.sendKeys(username);
-        passwordElement.sendKeys(password);
-        loginButtonElement.click();
-    }
-
+    //I can use this method when I call this class in other class to login, this is shorter way.
     public void login(){
         String username = ConfigurationReader.getProperty("storemanagerusername");
         String password = ConfigurationReader.getProperty("storemanagerpassword");
@@ -48,6 +50,14 @@ public class LoginPage {
         passwordElement.sendKeys(password);
         loginButtonElement.click();
     }
+
+    //we can use different username and password in that class where we call this LoginPage class
+    public void login(String username, String password){
+        userNameElement.sendKeys(username);
+        passwordElement.sendKeys(password);
+        loginButtonElement.click();
+    }
+
 
     public String getErrorMessage(){
         return errorMessageElement.getText();

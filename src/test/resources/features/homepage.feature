@@ -11,7 +11,7 @@ Feature: Home page functionality
     And there should be 8 menu options tabs
 
 
-
+#  @wip
   Scenario: Store Manager Login
     Given User on login page
     # using the login info of a salesmanager
