@@ -51,6 +51,26 @@ public class LoginPage {
         loginButtonElement.click();
     }
 
+
+    public void login(String role) {
+        String username = "";
+        String password = "";
+        if (role.equalsIgnoreCase("driver")) {
+            username = ConfigurationReader.getProperty("driverusername");
+            password = ConfigurationReader.getProperty("driverpassword");
+        } else if (role.equalsIgnoreCase("store manager")) {
+            username = ConfigurationReader.getProperty("storemanagerusername");
+            password = ConfigurationReader.getProperty("storemanagerpassword");
+        } else if (role.equalsIgnoreCase("sales manager")) {
+            username = ConfigurationReader.getProperty("salesmanagerusername");
+            password = ConfigurationReader.getProperty("salesmanagerpassword");
+        }
+        userNameElement.sendKeys(username);
+        passwordElement.sendKeys(password);
+        loginButtonElement.click();
+    }
+
+
     //we can use different username and password in that class where we call this LoginPage class
     public void login(String username, String password){
         userNameElement.sendKeys(username);
@@ -69,4 +89,11 @@ public class LoginPage {
             rememberMeElement.click();
         }
     }
+
+    public void goToLandingPage(){
+
+        Driver.getDriver().get(ConfigurationReader.getProperty("url"+ConfigurationReader.getProperty("environment")));
+    }
+
+
 }
