@@ -20,7 +20,13 @@ public abstract class BasePage {
     protected WebElement loaderMask;
 
     @FindBy(css = "h1[class='oro-subtitle']")
+    @CacheLookup
     protected WebElement pageSubTitle;
+
+
+    @FindBy(css = "#user-menu>a")
+    @CacheLookup
+    protected WebElement userMenuName;
 
 
     public BasePage() {
@@ -86,5 +92,16 @@ public abstract class BasePage {
             BrowserUtils.clickWithTimeOut(Driver.getDriver().findElement(By.xpath(moduleLocator)),  Integer.valueOf(ConfigurationReader.getProperty("SHORT_WAIT")));
         }
     }
+
+    public String getUserMenuName() {
+        waitUntilLoaderScreenDisappear();
+        return userMenuName.getText();
+    }
+
+    public String getPageTitle(){
+        waitUntilLoaderScreenDisappear();
+        return Driver.getDriver().getTitle();
+    }
+
 
 }

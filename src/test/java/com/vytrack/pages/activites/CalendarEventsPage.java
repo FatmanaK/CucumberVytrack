@@ -19,7 +19,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class CalendarEventsPage extends BasePage {
-    @FindBy(css = "[title='Create Calendar event']")
+    @FindBy(css = "a[href='/calendar/event/create'][title='Create Calendar event']")
     public WebElement createCalendarEventBtn;
 
     @FindBy(css = "a[title='Grid Settings']")
@@ -28,7 +28,7 @@ public class CalendarEventsPage extends BasePage {
     @FindBy(css = "a[title='Reset']")
     public WebElement resetBtnElement;
 
-    @FindBy(css = ".grid-header-cell__label")
+    @FindBy(css = "span.grid-header-cell__label")
     public List<WebElement> headers;
 
     @FindBy(css = "[id^='date_selector_oro_calendar_event_form_start']")
@@ -216,7 +216,10 @@ public class CalendarEventsPage extends BasePage {
         return startTime.getAttribute("value");
     }
 
-    public String getEndTime() {
-        return endTime.getAttribute("value");
+    public String getEndTime() {return endTime.getAttribute("value");}
+
+    public List<String> getTableHeaders() {
+        BrowserUtils.waitForStaleElement(createCalendarEventBtn);
+        return BrowserUtils.getElementsText(headers);
     }
 }

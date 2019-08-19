@@ -14,46 +14,38 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-
     <dependencies>
-
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>4.2.2</version>
         </dependency>
-
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>4.2.2</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-core</artifactId>
             <version>4.2.2</version>
         </dependency>
-
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>3.141.59</version>
         </dependency>
-
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>3.6.2</version>
         </dependency>
-
         <dependency>
             <groupId>com.aventstack</groupId>
             <artifactId>extentreports</artifactId>
             <version>4.0.9</version>
         </dependency>
-
         <dependency>
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
@@ -64,19 +56,16 @@
             <artifactId>log4j-api</artifactId>
             <version>2.12.0</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.12.0</version>
         </dependency>
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.21</version>
         </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -84,123 +73,157 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+                <configuration>
+                    <runOrder>alphabetic</runOrder>
+                    <includes>
+                        <include>**/CukesRunner.java</include>
+                        <include>**/FailedRunner.java</include>
+                    </includes>
+
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>4.8.0</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>Cucumber HTML Reports</projectName>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <inputDirectory>${project.build.directory}</inputDirectory>
+                            <jsonFiles>
+                                <param>**/cucumber.json</param>
+                            </jsonFiles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 
 </project>
 
 
 
-<!--cucumber reporter runs through command line-->
 
-<!--    <build>-->
-<!--        <plugins>-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-surefire-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <testFailureIgnore>true</testFailureIgnore>-->
-<!--                    <includes>-->
-<!--                        <include>**/*CukesRunner.java</include>-->
-<!--                    </includes>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>net.masterthought</groupId>-->
-<!--                <artifactId>maven-cucumber-reporting</artifactId>-->
-<!--                <version>4.4.0</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>execution</id>-->
-<!--                        <phase>verify</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>generate</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <projectName>OnlineSpring2019Cucumber</projectName>-->
-<!--                            &lt;!&ndash; optional, per documentation set this to "true" to bypass generation of Cucumber Reports entirely, defaults to false if not specified &ndash;&gt;-->
-<!--                            <skip>false</skip>-->
-<!--                            &lt;!&ndash; output directory for the generated report &ndash;&gt;-->
-<!--                            <outputDirectory>${project.build.directory}</outputDirectory>-->
-<!--                            &lt;!&ndash; optional, defaults to outputDirectory if not specified &ndash;&gt;-->
-<!--                            <inputDirectory>${project.build.directory}/jsonReports</inputDirectory>-->
-<!--                            <jsonFiles>-->
-<!--                                &lt;!&ndash; supports wildcard or name pattern &ndash;&gt;-->
-<!--                                <param>**/*.json</param>-->
-<!--                            </jsonFiles>-->
-<!--                            &lt;!&ndash; optional, defaults to outputDirectory if not specified &ndash;&gt;-->
-<!--                            <classificationDirectory>${project.build.directory}/classifications</classificationDirectory>-->
-<!--                            <classificationFiles>-->
-<!--                                &lt;!&ndash; supports wildcard or name pattern &ndash;&gt;-->
-<!--                                <param>sample.properties</param>-->
-<!--                                <param>other.properties</param>-->
-<!--                            </classificationFiles>-->
-<!--&lt;!&ndash;                            <parallelTesting>false</parallelTesting>&ndash;&gt;-->
-<!--                            &lt;!&ndash; optional, set true to fail build onmvn st failures &ndash;&gt;-->
-<!--                            <checkBuildResult>false</checkBuildResult>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
-<!--    </build>-->
+<!--Vasyl's Dependencies and Json report-->
 
-
-
-
-
-
-        <!--Vasyls dependencies-->
-        <!--    <dependencies>-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.seleniumhq.selenium</groupId>-->
-        <!--            <artifactId>selenium-java</artifactId>-->
-        <!--            <version>3.141.59</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>io.github.bonigarcia</groupId>-->
-        <!--            <artifactId>webdrivermanager</artifactId>-->
-        <!--            <version>3.6.1</version>-->
-        <!--            <scope>test</scope>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.github.javafaker</groupId>-->
-        <!--            <artifactId>javafaker</artifactId>-->
-        <!--            <version>0.18</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.apache.logging.log4j</groupId>-->
-        <!--            <artifactId>log4j-api</artifactId>-->
-        <!--            <version>2.12.0</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.apache.logging.log4j</groupId>-->
-        <!--            <artifactId>log4j-core</artifactId>-->
-        <!--            <version>2.12.0</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.slf4j</groupId>-->
-        <!--            <artifactId>slf4j-simple</artifactId>-->
-        <!--            <version>1.7.21</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>io.cucumber</groupId>-->
-        <!--            <artifactId>cucumber-java</artifactId>-->
-        <!--            <version>4.2.2</version>-->
-        <!--            <scope>test</scope>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>io.cucumber</groupId>-->
-        <!--            <artifactId>cucumber-junit</artifactId>-->
-        <!--            <version>4.2.2</version>-->
-        <!--            <scope>test</scope>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>junit</groupId>-->
-        <!--            <artifactId>junit</artifactId>-->
-        <!--            <version>4.12</version>-->
-        <!--            <scope>test</scope>-->
-        <!--        </dependency>-->
-        <!--    </dependencies>-->
-
+<!--        <?xml version="1.0" encoding="UTF-8"?>-->
+<!--<project xmlns="http://maven.apache.org/POM/4.0.0"-->
+<!--         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">-->
+<!--<modelVersion>4.0.0</modelVersion>-->
+<!--<groupId>com.vytrack</groupId>-->
+<!--<artifactId>OnlineSpring2019Cucumber</artifactId>-->
+<!--<version>1.0-SNAPSHOT</version>-->
+<!--<properties>-->
+<!--    <maven.compiler.source>1.8</maven.compiler.source>-->
+<!--    <maven.compiler.target>1.8</maven.compiler.target>-->
+<!--    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+<!--</properties>-->
+<!--<dependencies>-->
+<!--    <dependency>-->
+<!--        <groupId>org.seleniumhq.selenium</groupId>-->
+<!--        <artifactId>selenium-java</artifactId>-->
+<!--        <version>3.141.59</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--        <groupId>io.github.bonigarcia</groupId>-->
+<!--        <artifactId>webdrivermanager</artifactId>-->
+<!--        <version>3.6.1</version>-->
+<!--        <scope>test</scope>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--        <groupId>com.github.javafaker</groupId>-->
+<!--        <artifactId>javafaker</artifactId>-->
+<!--        <version>0.18</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--        <groupId>org.apache.logging.log4j</groupId>-->
+<!--        <artifactId>log4j-api</artifactId>-->
+<!--        <version>2.12.0</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--        <groupId>org.apache.logging.log4j</groupId>-->
+<!--        <artifactId>log4j-core</artifactId>-->
+<!--        <version>2.12.0</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--        <groupId>org.slf4j</groupId>-->
+<!--        <artifactId>slf4j-simple</artifactId>-->
+<!--        <version>1.7.21</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--        <groupId>io.cucumber</groupId>-->
+<!--        <artifactId>cucumber-java</artifactId>-->
+<!--        <version>4.2.2</version>-->
+<!--        <scope>test</scope>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--        <groupId>io.cucumber</groupId>-->
+<!--        <artifactId>cucumber-junit</artifactId>-->
+<!--        <version>4.2.2</version>-->
+<!--        <scope>test</scope>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--        <groupId>junit</groupId>-->
+<!--        <artifactId>junit</artifactId>-->
+<!--        <version>4.12</version>-->
+<!--        <scope>test</scope>-->
+<!--    </dependency>-->
+<!--</dependencies>-->
+<!--<build>-->
+<!--    <plugins>-->
+<!--        <plugin>-->
+<!--            <groupId>org.apache.maven.plugins</groupId>-->
+<!--            <artifactId>maven-surefire-plugin</artifactId>-->
+<!--            <version>2.22.2</version>-->
+<!--            <configuration>-->
+<!--                <includes>-->
+<!--                    <include>**/CukesRunner.java</include>-->
+<!--                </includes>-->
+<!--                <testFailureIgnore>true</testFailureIgnore>-->
+<!--            </configuration>-->
+<!--        </plugin>-->
+<!--        <plugin>-->
+<!--            <groupId>net.masterthought</groupId>-->
+<!--            <artifactId>maven-cucumber-reporting</artifactId>-->
+<!--            <version>4.8.0</version>-->
+<!--            <executions>-->
+<!--                <execution>-->
+<!--                    <id>execution</id>-->
+<!--                    <phase>verify</phase>-->
+<!--                    <goals>-->
+<!--                        <goal>generate</goal>-->
+<!--                    </goals>-->
+<!--                    <configuration>-->
+<!--                        <projectName>Cucumber HTML Reports</projectName>-->
+<!--                        <outputDirectory>${project.build.directory}</outputDirectory>-->
+<!--                        <inputDirectory>${project.build.directory}</inputDirectory>-->
+<!--                        <jsonFiles>-->
+<!--                            <param>**/cucumber.json</param>-->
+<!--                        </jsonFiles>-->
+<!--                    </configuration>-->
+<!--                </execution>-->
+<!--            </executions>-->
+<!--        </plugin>-->
+<!--    </plugins>-->
+<!--</build>-->
+<!--</project>-->
 
 
 

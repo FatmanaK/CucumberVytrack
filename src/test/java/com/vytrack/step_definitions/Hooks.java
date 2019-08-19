@@ -1,5 +1,6 @@
 package com.vytrack.step_definitions;
 
+import com.vytrack.utilities.ConfigurationReader;
 import com.vytrack.utilities.Driver;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -21,6 +22,7 @@ public class Hooks {
 
         Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         //we can also add maximize screen here, but I already added at Driver class
+        Driver.getDriver().get(ConfigurationReader.getProperty("url" + ConfigurationReader.getProperty("environment")));
     }
 
 

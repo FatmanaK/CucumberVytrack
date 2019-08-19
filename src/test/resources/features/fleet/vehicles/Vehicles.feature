@@ -8,3 +8,9 @@ Feature: Vehicles
     Then user navigates to "Fleet" and "Vehicles"
     And user verifies that "Cars" page name is displayed
     And user verifies that default page number is 1
+
+
+
+#  vehicle, login, navigation
+#
+#  removed go to landing page step
